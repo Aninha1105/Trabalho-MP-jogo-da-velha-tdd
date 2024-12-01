@@ -2,7 +2,6 @@
  * \file  velha.cpp
  */
 
- 
 #include "velha.hpp"
 
 /** 
@@ -13,9 +12,14 @@
  *  Descrever o que a funcao faz
  */ 
 
-int VerificaVelha( int velha[3][3] )
-{
-	return 0; /*!< retorna zero para teste */ 
+bool vencedorX(int velha[3][3]) {
+  return false;
 }
 
+int VerificaVelha(int velha[3][3]) {
+  if (vencedorX(velha) == true) {
+    return 1;
+  }
 
+  return -200;
+}

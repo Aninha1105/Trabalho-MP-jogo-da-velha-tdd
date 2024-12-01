@@ -16,14 +16,14 @@ test: testa_velha
 	./testa_velha
 	
 cpplint: testa_velha.cpp   velha.cpp velha.hpp
-	cpplint   --exclude=catch.hpp  *.*
+	python3 cpplint.py   --exclude=catch.hpp  *.*
 	
-gcov: testa_velha.cpp   velha.cpp velha.hpp 
-	g++ -std=c++11 -Wall -fprofile-arcs -ftest-coverage -c velha.cpp
-	g++ -std=c++11 -Wall -fprofile-arcs -ftest-coverage velha.o testa_velha.cpp -o testa_velha
+gcov: testa_velha.cpp velha.cpp velha.hpp
+	g++ -std=c++11 -Wall -ftest-coverage -fprofile-arcs -c velha.cpp -o velha.o
+	g++ -std=c++11 -Wall -ftest-coverage -fprofile-arcs velha.o testa_velha.cpp -o testa_velha
 	./testa_velha
-	gcov *.cpp	
-	 
+	gcov *.cpp
+
 debug: testa_velha.cpp   velha.cpp velha.hpp 
 	g++ -std=c++11 -Wall -g -c velha.cpp
 	g++ -std=c++11 -Wall  -g velha.o testa_velha.cpp -o testa_velha
