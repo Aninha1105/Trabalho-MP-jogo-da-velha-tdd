@@ -3,6 +3,7 @@
  */
 
 #include "velha.hpp"
+#include <stdio.h>
 
 /** 
  * @brief verifica situacao do jogo da velha  
@@ -61,15 +62,15 @@ int* estadoTabuleiro(int velha[3][3]) {
   static int contador[3];
   contador[0] = 0;
   contador[1] = 0;
-  contador[2] = 2;
+  contador[2] = 0;
 
   for (int linhaIndex = 0 ; linhaIndex < 3 ; linhaIndex++) {
     for (int colunaIndex = 0; colunaIndex < 3 ; colunaIndex++) {
-      if (velha[linhaIndex][colunaIndex] == '0') {  // Posições vazias no jogo.
+      if (velha[linhaIndex][colunaIndex] == 0) {  // Posições vazias no jogo.
         contador[0]++;
-      } else if (velha[linhaIndex][colunaIndex] == '1') {  // 'X's no jogo.
+      } else if (velha[linhaIndex][colunaIndex] == 1) {  // 'X's no jogo.
         contador[1]++;
-      } else if (velha[linhaIndex][colunaIndex] == '2') {  // 'O's no jogo.
+      } else if (velha[linhaIndex][colunaIndex] == 2) {  // 'O's no jogo.
         contador[2]++;
       }
     }
@@ -115,15 +116,20 @@ bool empatado(int velha[3][3], int contadorVazio) {
   }
 }
 
-bool indefinido(int velha[3][3]) {
-  return false;
+bool indefinido(int velha[3][3], int contadorVazio) {
+  if (!vencedorX(velha) && !vencedorO(velha) && contadorVazio > 0) {
+    return true;
+  } else {
+    return false;
+  }
 }
 
 int VerificaVelha(int velha[3][3]) {
   // Conta as ocorrências de posições vazias, 'X' e 'O' no tabuleiro.
   int* contador = estadoTabuleiro(velha);
+  printf("%d %d %d\n", contador[0], contador[1], contador[2]);
 
-  if (indefinido(velha)) {
+  if (indefinido(velha, contador[0])) {
     return -1;
   }
 
