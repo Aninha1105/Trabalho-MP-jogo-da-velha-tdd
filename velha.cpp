@@ -69,7 +69,13 @@ bool vencedorX(int velha[3][3]) {
 }
 
 bool vencedorO(int velha[3][3]) {
-  return false;
+  if (verificaLinha(velha, 2) ||
+      verificaColuna(velha, 2) ||
+      verificaDiagonal(velha, 2)) {
+    return true;
+  } else {
+    return false;
+  }
 }
 
 int VerificaVelha(int velha[3][3]) {
