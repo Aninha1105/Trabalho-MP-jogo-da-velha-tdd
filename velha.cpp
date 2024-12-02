@@ -126,9 +126,17 @@ bool indefinido(int velha[3][3], int contadorVazio) {
   }
 }
 
+bool impossivel(int velha[3][3]) {
+  return false;
+}
+
 int VerificaVelha(int velha[3][3]) {
   // Conta as ocorrências de posições vazias, 'X' e 'O' no tabuleiro.
   int* contador = estadoTabuleiro(velha);
+
+  if (impossivel(velha)) {
+    return -2;
+  }
 
   // Verifica se o jogo está indefinido.
   if (indefinido(velha, contador[0])) {

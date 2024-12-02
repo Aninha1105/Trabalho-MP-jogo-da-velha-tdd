@@ -36,3 +36,10 @@ TEST_CASE("Teste 4: se o jogo está indefinido") {
                      { 0, 0, 0 }};
     REQUIRE(VerificaVelha(teste4) == -1);
 }
+
+TEST_CASE("Teste 5: se o jogo é com certeza impossível pelas regras") {
+  int teste5[3][3]= {{ 2, 2, 2 },
+                     { 1, 1, 1 },
+                     { 2, 2, 2 }};
+    REQUIRE(VerificaVelha(teste5) == -2);
+}
