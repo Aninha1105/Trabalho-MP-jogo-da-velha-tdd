@@ -3,7 +3,6 @@
  */
 
 #include "velha.hpp"
-#include <stdio.h>
 
 /** 
  * @brief verifica situacao do jogo da velha  
@@ -116,6 +115,9 @@ bool empatado(int velha[3][3], int contadorVazio) {
   }
 }
 
+// Verifica se o jogo está indefinido.
+// Critérios para indefinido: sem vencedor e com posições vazias no tabuleiro.
+// Retorna true se o jogo estiver indefinido, caso contrário, retorna false.
 bool indefinido(int velha[3][3], int contadorVazio) {
   if (!vencedorX(velha) && !vencedorO(velha) && contadorVazio > 0) {
     return true;
@@ -127,13 +129,13 @@ bool indefinido(int velha[3][3], int contadorVazio) {
 int VerificaVelha(int velha[3][3]) {
   // Conta as ocorrências de posições vazias, 'X' e 'O' no tabuleiro.
   int* contador = estadoTabuleiro(velha);
-  printf("%d %d %d\n", contador[0], contador[1], contador[2]);
 
+  // Verifica se o jogo está indefinido.
   if (indefinido(velha, contador[0])) {
     return -1;
   }
 
-  // Verifica se o jogo está empatado
+  // Verifica se o jogo está empatado.
   if (empatado(velha, contador[0])) {
     return 0;
   }
