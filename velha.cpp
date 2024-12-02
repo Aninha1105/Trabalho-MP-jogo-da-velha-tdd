@@ -55,6 +55,27 @@ bool verificaDiagonal(int velha[3][3], int jogador) {
   return false;
 }
 
+int* estadoTabuleiro(int velha[3][3]) {
+  static int contador[3];
+  contador[0] = 0;
+  contador[1] = 0;
+  contador[2] = 2;
+
+  for (int linhaIndex = 0 ; linhaIndex < 3 ; linhaIndex++) {
+    for (int colunaIndex = 0; colunaIndex < 3 ; colunaIndex++) {
+      if (velha[linhaIndex][colunaIndex] == '0') {
+        contador[0]++;
+      } else if (velha[linhaIndex][colunaIndex] == '1') {
+        contador[1]++;
+      } else if (velha[linhaIndex][colunaIndex] == '2') {
+        contador[2]++;
+      }
+    }
+  }
+
+  return contador;
+}
+
 // Verifica se o jogador 'X' (representado por '1') venceu o jogo.
 // Chama as funções de linha, coluna e diagonal para verificar a vitória.
 // Retorna true se o jogador 'X' venceu, caso contrário, retorna false.
@@ -81,11 +102,17 @@ bool vencedorO(int velha[3][3]) {
   }
 }
 
-bool empatado(int velha[3][3]) {
-  return false;
+bool empatado(int velha[3][3], int contadorVazio) {
+  if (!vencedorX(velha) && !vencedorO(velha) && contadorVazio == 0) {
+    return true;
+  } else {
+    return false;
+  }
 }
 
 int VerificaVelha(int velha[3][3]) {
+  int* contador = estadoTabuleiro(velha);
+
   // Verifica se 'X' (representado por '1') venceu o jogo.
   if (vencedorX(velha)) {
     return 1;
@@ -96,7 +123,7 @@ int VerificaVelha(int velha[3][3]) {
     return 2;
   }
 
-  if (empatado(velha)) {
+  if (empatado(velha, contador[0])) {
     return 0;
   }
 
