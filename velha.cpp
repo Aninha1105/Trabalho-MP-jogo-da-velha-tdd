@@ -55,6 +55,8 @@ bool verificaDiagonal(int velha[3][3], int jogador) {
   return false;
 }
 
+// Conta as ocorrências de 'X'(1), 'O'(2) e posições vazias(0) no tabuleiro.
+// Retorna um ponteiro para um array com as ocorrências de '0', '1' e '2'.
 int* estadoTabuleiro(int velha[3][3]) {
   static int contador[3];
   contador[0] = 0;
@@ -63,11 +65,11 @@ int* estadoTabuleiro(int velha[3][3]) {
 
   for (int linhaIndex = 0 ; linhaIndex < 3 ; linhaIndex++) {
     for (int colunaIndex = 0; colunaIndex < 3 ; colunaIndex++) {
-      if (velha[linhaIndex][colunaIndex] == '0') {
+      if (velha[linhaIndex][colunaIndex] == '0') {  // Posições vazias no jogo.
         contador[0]++;
-      } else if (velha[linhaIndex][colunaIndex] == '1') {
+      } else if (velha[linhaIndex][colunaIndex] == '1') {  // 'X's no jogo.
         contador[1]++;
-      } else if (velha[linhaIndex][colunaIndex] == '2') {
+      } else if (velha[linhaIndex][colunaIndex] == '2') {  // 'O's no jogo.
         contador[2]++;
       }
     }
@@ -102,6 +104,9 @@ bool vencedorO(int velha[3][3]) {
   }
 }
 
+// Verifica se o jogo está empatado.
+// Critérios para empate: sem vencedor e sem posições vazias no tabuleiro.
+// Retorna true se o jogo estiver empatado, caso contrário, retorna false.
 bool empatado(int velha[3][3], int contadorVazio) {
   if (!vencedorX(velha) && !vencedorO(velha) && contadorVazio == 0) {
     return true;
@@ -111,6 +116,7 @@ bool empatado(int velha[3][3], int contadorVazio) {
 }
 
 int VerificaVelha(int velha[3][3]) {
+  // Conta as ocorrências de posições vazias, 'X' e 'O' no tabuleiro.
   int* contador = estadoTabuleiro(velha);
 
   // Verifica se 'X' (representado por '1') venceu o jogo.
@@ -123,6 +129,7 @@ int VerificaVelha(int velha[3][3]) {
     return 2;
   }
 
+  // Verifica se o jogo está empatado
   if (empatado(velha, contador[0])) {
     return 0;
   }
