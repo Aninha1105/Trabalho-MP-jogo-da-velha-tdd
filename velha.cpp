@@ -81,6 +81,10 @@ bool vencedorO(int velha[3][3]) {
   }
 }
 
+bool empatado(int velha[3][3]) {
+  return false;
+}
+
 int VerificaVelha(int velha[3][3]) {
   // Verifica se 'X' (representado por '1') venceu o jogo.
   if (vencedorX(velha)) {
@@ -90,6 +94,10 @@ int VerificaVelha(int velha[3][3]) {
   // Verifica se 'O' (representado por '2') venceu o jogo.
   if (vencedorO(velha)) {
     return 2;
+  }
+
+  if (empatado(velha)) {
+    return 0;
   }
 
   return -200;
