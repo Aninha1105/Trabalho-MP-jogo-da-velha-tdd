@@ -115,13 +115,21 @@ bool empatado(int velha[3][3], int contadorVazio) {
   }
 }
 
+bool indefinido(int velha[3][3]) {
+  return false;
+}
+
 int VerificaVelha(int velha[3][3]) {
   // Conta as ocorrências de posições vazias, 'X' e 'O' no tabuleiro.
   int* contador = estadoTabuleiro(velha);
 
-  // Verifica se 'X' (representado por '1') venceu o jogo.
-  if (vencedorX(velha)) {
-    return 1;
+  if (indefinido(velha)) {
+    return -1;
+  }
+
+  // Verifica se o jogo está empatado
+  if (empatado(velha, contador[0])) {
+    return 0;
   }
 
   // Verifica se 'O' (representado por '2') venceu o jogo.
@@ -129,9 +137,9 @@ int VerificaVelha(int velha[3][3]) {
     return 2;
   }
 
-  // Verifica se o jogo está empatado
-  if (empatado(velha, contador[0])) {
-    return 0;
+  // Verifica se 'X' (representado por '1') venceu o jogo.
+  if (vencedorX(velha)) {
+    return 1;
   }
 
   return -200;
