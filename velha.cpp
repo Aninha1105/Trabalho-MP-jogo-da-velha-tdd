@@ -106,10 +106,11 @@ bool vencedorO(int velha[3][3]) {
 }
 
 // Verifica se o jogo está empatado.
-// Critérios para empate: sem vencedor e sem posições vazias no tabuleiro.
+// Critérios para empate: sem vencedor;
+//                        sem posições vazias no tabuleiro.
 // Retorna true se o jogo estiver empatado, caso contrário, retorna false.
 bool empatado(int velha[3][3], int contadorVazio) {
-  if (!vencedorX(velha) && !vencedorO(velha) && contadorVazio == 0) {
+  if (contadorVazio == 0 && !vencedorX(velha) && !vencedorO(velha)) {
     return true;
   } else {
     return false;
@@ -117,18 +118,24 @@ bool empatado(int velha[3][3], int contadorVazio) {
 }
 
 // Verifica se o jogo está indefinido.
-// Critérios para indefinido: sem vencedor e com posições vazias no tabuleiro.
+// Critérios para indefinido: sem vencedor;
+//                            com posições vazias no tabuleiro.
 // Retorna true se o jogo estiver indefinido, caso contrário, retorna false.
 bool indefinido(int velha[3][3], int contadorVazio) {
-  if (!vencedorX(velha) && !vencedorO(velha) && contadorVazio > 0) {
+  if (contadorVazio > 0 && !vencedorX(velha) && !vencedorO(velha)) {
     return true;
   } else {
     return false;
   }
 }
 
+// Verifica se o jogo é com certeza impossível pelas regras.
+// Critérios para impossível: dois vencedores;
+//                            diferença entre num'X' e num'O' > 1.
+// Retorna true se o jogo estiver indefinido, caso contrário, retorna false.
 bool impossivel(int velha[3][3], int contadorX, int contadorO) {
-  if ((vencedorX(velha) && vencedorO(velha)) || abs(contadorX - contadorO) > 1) {
+  if (abs(contadorX - contadorO) > 1 ||
+      (vencedorX(velha) && vencedorO(velha))) {
     return true;
   } else {
     return false;
@@ -139,6 +146,7 @@ int VerificaVelha(int velha[3][3]) {
   // Conta as ocorrências de posições vazias, 'X' e 'O' no tabuleiro.
   int* contador = estadoTabuleiro(velha);
 
+  // Verifica se o jogo é impossível.
   if (impossivel(velha, contador[1], contador[2])) {
     return -2;
   }
