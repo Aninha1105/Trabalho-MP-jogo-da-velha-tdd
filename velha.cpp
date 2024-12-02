@@ -44,11 +44,11 @@ bool verificaColuna(int velha[3][3], int jogador) {
 bool verificaDiagonal(int velha[3][3], int jogador) {
   if (velha[0][0] == jogador &&
       velha[1][1] == jogador &&
-      velha[2][2] == jogador) {  // Verifica a diagonal principal
+      velha[2][2] == jogador) {  // Verifica a diagonal principal.
     return true;
   } else if (velha[0][2] == jogador &&
              velha[1][1] == jogador &&
-             velha[2][0] == jogador) {  // Verifica a diagonal secundária
+             velha[2][0] == jogador) {  // Verifica a diagonal secundária.
     return true;
   }
 
@@ -68,6 +68,9 @@ bool vencedorX(int velha[3][3]) {
   }
 }
 
+// Verifica se o jogador 'O' (representado por '2') venceu o jogo.
+// Chama as funções de linha, coluna e diagonal para verificar a vitória.
+// Retorna true se o jogador 'O' venceu, caso contrário, retorna false.
 bool vencedorO(int velha[3][3]) {
   if (verificaLinha(velha, 2) ||
       verificaColuna(velha, 2) ||
@@ -79,11 +82,12 @@ bool vencedorO(int velha[3][3]) {
 }
 
 int VerificaVelha(int velha[3][3]) {
-  // Verifica se 'X' (representado por '1') venceu o jogo
+  // Verifica se 'X' (representado por '1') venceu o jogo.
   if (vencedorX(velha)) {
     return 1;
   }
 
+  // Verifica se 'O' (representado por '2') venceu o jogo.
   if (vencedorO(velha)) {
     return 2;
   }
