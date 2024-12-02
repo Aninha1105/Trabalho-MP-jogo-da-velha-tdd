@@ -3,6 +3,7 @@
  */
 
 #include "velha.hpp"
+#include <stdlib.h>
 
 /** 
  * @brief verifica situacao do jogo da velha  
@@ -126,15 +127,19 @@ bool indefinido(int velha[3][3], int contadorVazio) {
   }
 }
 
-bool impossivel(int velha[3][3]) {
-  return false;
+bool impossivel(int velha[3][3], int contadorX, int contadorO) {
+  if ((vencedorX(velha) && vencedorO(velha)) || abs(contadorX - contadorO) > 1) {
+    return true;
+  } else {
+    return false;
+  }
 }
 
 int VerificaVelha(int velha[3][3]) {
   // Conta as ocorrências de posições vazias, 'X' e 'O' no tabuleiro.
   int* contador = estadoTabuleiro(velha);
 
-  if (impossivel(velha)) {
+  if (impossivel(velha, contador[1], contador[2])) {
     return -2;
   }
 
