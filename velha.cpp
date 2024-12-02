@@ -12,36 +12,56 @@
  *  Descrever o que a funcao faz
  */ 
 
-bool linha(int velha[3][3], int j) {
-  for (int l = 0 ; l < 3 ; l++) {
-    if (velha[l][0] == j && velha[l][1] == j && velha[l][2] == j) {
+
+// Verifica se o 'jogador' venceu em alguma linha do tabuleiro.
+// Retorna true se venceu, caso contrário, retorna false.
+bool verificaLinha(int velha[3][3], int jogador) {
+  for (int linhaIndex = 0 ; linhaIndex < 3 ; linhaIndex++) {
+    if (velha[linhaIndex][0] == jogador &&
+        velha[linhaIndex][1] == jogador &&
+        velha[linhaIndex][2] == jogador) {
       return true;
     }
   }
   return false;
 }
 
-bool coluna(int velha[3][3], int j) {
-  for (int c = 0 ; c < 3 ; c++) {
-    if (velha[0][c] == j && velha[1][c] == j && velha[2][c] == j) {
+// Verifica se o 'jogador' venceu em alguma coluna do tabuleiro.
+// Retorna true se venceu, caso contrário, retorna false.
+bool verificaColuna(int velha[3][3], int jogador) {
+  for (int colunaIndex = 0 ; colunaIndex < 3 ; colunaIndex++) {
+    if (velha[0][colunaIndex] == jogador &&
+        velha[1][colunaIndex] == jogador &&
+        velha[2][colunaIndex] == jogador) {
       return true;
     }
   }
   return false;
 }
 
-bool diagonal(int velha[3][3], int j) {
-  if (velha[0][0] == j && velha[1][1] == j && velha[2][2] == j) {
+// Verifica se o 'jogador' venceu em alguma diagonal do tabuleiro.
+// Retorna true se venceu, caso contrário, retorna false.
+bool verificaDiagonal(int velha[3][3], int jogador) {
+  if (velha[0][0] == jogador &&
+      velha[1][1] == jogador &&
+      velha[2][2] == jogador) {  // Verifica a diagonal principal
     return true;
-  } else if (velha[0][2] == j && velha[1][1] == j && velha[2][0] == j) {
+  } else if (velha[0][2] == jogador &&
+             velha[1][1] == jogador &&
+             velha[2][0] == jogador) {  // Verifica a diagonal secundária
     return true;
   }
 
   return false;
 }
 
+// Verifica se o jogador 'X' (representado por '1') venceu o jogo.
+// Chama as funções de linha, coluna e diagonal para verificar a vitória.
+// Retorna true se o jogador 'X' venceu, caso contrário, retorna false.
 bool vencedorX(int velha[3][3]) {
-  if (linha(velha, 1) || coluna(velha, 1) || diagonal(velha, 1)) {
+  if (verificaLinha(velha, 1) ||
+      verificaColuna(velha, 1) ||
+      verificaDiagonal(velha, 1)) {
     return true;
   } else {
     return false;
@@ -49,7 +69,8 @@ bool vencedorX(int velha[3][3]) {
 }
 
 int VerificaVelha(int velha[3][3]) {
-  if (vencedorX(velha) == true) {
+  // Verifica se 'X' (representado por '1') venceu o jogo
+  if (vencedorX(velha)) {
     return 1;
   }
 
