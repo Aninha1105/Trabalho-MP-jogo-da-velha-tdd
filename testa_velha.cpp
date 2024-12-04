@@ -1,5 +1,7 @@
 /**
  * \file testa_velha.cpp
+ * \brief Testes unitários para verificar o estado do jogo da velha usando Catch2.
+ * \author Ana Luísa de Souza Paraguassu - 231003442
  */
 
 #include "velha.hpp"
@@ -8,7 +10,7 @@
 #define CATCH_CONFIG_MAIN
 #include "catch.hpp"
 
-
+// Testes Base
 TEST_CASE("Teste 1: se o vencedor foi o X") {
   int teste1[3][3]= {{ 2, 0, 1 },
                      { 2, 0, 1 },
