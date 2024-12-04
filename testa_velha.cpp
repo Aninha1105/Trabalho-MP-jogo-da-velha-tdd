@@ -43,3 +43,53 @@ TEST_CASE("Teste 5: se o jogo é com certeza impossível pelas regras") {
                      { 2, 2, 2 }};
     REQUIRE(VerificaVelha(teste5) == -2);
 }
+
+// Testes Adicionais
+TEST_CASE("Teste 6: se o vencedor foi o X") {
+  int teste6[3][3]= {{ 2, 0, 0 },
+                     { 1, 1, 1 },
+                     { 2, 0, 0 }};
+    REQUIRE(VerificaVelha(teste6) == 1);
+}
+
+TEST_CASE("Teste 7: se o vencedor foi o X") {
+  int teste7[3][3]= {{ 2, 0, 1 },
+                     { 0, 1, 0 },
+                     { 1, 0, 2 }};
+    REQUIRE(VerificaVelha(teste7) == 1);
+}
+
+TEST_CASE("Teste 8: se o vencedor foi o O") {
+  int teste8[3][3]= {{ 0, 2, 1 },
+                     { 0, 2, 1 },
+                     { 1, 2, 0 }};
+    REQUIRE(VerificaVelha(teste8) == 2);
+}
+
+TEST_CASE("Teste 9: se o vencedor foi o O") {
+  int teste9[3][3]= {{ 1, 0, 1 },
+                     { 2, 2, 2 },
+                     { 0, 1, 0 }};
+    REQUIRE(VerificaVelha(teste9) == 2);
+}
+
+TEST_CASE("Teste 10: se o jogo está indefinido") {
+  int teste10[3][3]= {{ 2, 1, 0 },
+                      { 2, 1, 1 },
+                      { 1, 2, 0 }};
+    REQUIRE(VerificaVelha(teste10) == -1);
+}
+
+TEST_CASE("Teste 11: se o jogo é com certeza impossível pelas regras") {
+  int teste11[3][3]= {{ 1, 1, 1 },
+                      { 1, 1, 1 },
+                      { 1, 1, 1 }};
+    REQUIRE(VerificaVelha(teste11) == -2);
+}
+
+TEST_CASE("Teste 12: se o jogo é com certeza impossível pelas regras") {
+  int teste12[3][3]= {{ 2, 1, 1 },
+                      { 1, 2, 1 },
+                      { 1, 1, 2 }};
+    REQUIRE(VerificaVelha(teste12) == -2);
+}
